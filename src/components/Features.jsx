@@ -25,10 +25,12 @@ function Features() {
   return (
     <section 
       id="features"
-      className="relative bg-black py-32"
+      className="relative bg-black py-20 md:py-32"
     >
       
       <div className="
+        hidden
+        sm:block
         absolute
         left-1/4
         top-1/2
@@ -54,22 +56,25 @@ function Features() {
           text-center
         ">
           <h2 className="
-            text-4xl
+            text-3xl
+            sm:text-4xl
+            md:text-5xl
             font-extrabold
             tracking-tight
             text-white
-            md:text-5xl
             leading-[1.2]
           ">
             Une nouvelle façon de travailler{" "}
-            <span className="bg-gradient-to-r from-red-500 to-rose-400 bg-clip-text text-transparent">
+            <span className="block sm:inline bg-gradient-to-r from-red-500 to-rose-400 bg-clip-text text-transparent">
               avec vos documents.
             </span>
           </h2>
 
           <p className="
-            mt-6
-            text-lg
+            mt-4
+            md:mt-6
+            text-base
+            md:text-lg
             leading-relaxed
             text-slate-400
             max-w-2xl
@@ -81,9 +86,12 @@ function Features() {
 
 
         <div className="
-          mt-20
+          mt-16
+          md:mt-20
           grid
-          gap-8
+          gap-6
+          md:gap-8
+          grid-cols-1
           sm:grid-cols-2
           lg:grid-cols-3
         ">
@@ -93,14 +101,15 @@ function Features() {
             return (
               <div
                 key={index}
-                className="
+                className={`
                   group
                   relative
                   rounded-3xl
                   border
                   border-white/5
                   bg-zinc-900/30
-                  p-8
+                  p-6
+                  md:p-8
                   backdrop-blur-sm
                   transition-all
                   duration-300
@@ -109,7 +118,8 @@ function Features() {
                   hover:bg-zinc-900/50
                   shadow-xl
                   shadow-black/20
-                "
+                  ${index === 2 ? "sm:col-span-2 lg:col-span-1" : ""}
+                `}
               >
                 
                 <div className="absolute inset-0 rounded-3xl bg-red-500/[0.02] opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
@@ -142,8 +152,10 @@ function Features() {
                 </div>
 
                 <h3 className="
-                  mt-6
-                  text-xl
+                  mt-5
+                  md:mt-6
+                  text-lg
+                  md:text-xl
                   font-semibold
                   tracking-tight
                   text-white
@@ -152,8 +164,10 @@ function Features() {
                 </h3>
 
                 <p className="
-                  mt-3
-                  text-base
+                  mt-2
+                  md:mt-3
+                  text-sm
+                  md:text-base
                   leading-relaxed
                   text-slate-400
                   transition-colors

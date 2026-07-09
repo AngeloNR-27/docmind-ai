@@ -5,7 +5,8 @@ function Footer() {
       bg-black
       border-t
       border-white/5
-      py-12
+      py-10
+      md:py-12
     ">
 
       <div className="
@@ -13,12 +14,24 @@ function Footer() {
         flex
         max-w-7xl
         flex-col
+        md:flex-row-reverse
         items-center
         justify-between
         gap-6
         px-6
-        md:flex-row
       ">
+
+
+        <p className="
+          text-xs
+          font-medium
+          tracking-wide
+          text-slate-500
+          text-center
+          md:text-right
+        ">
+          &copy; 2026 DocMind AI. Tous droits réservés.
+        </p>
 
 
         <div className="text-center md:text-left">
@@ -43,18 +56,6 @@ function Footer() {
           </p>
 
         </div>
-
-
-
-        <p className="
-          text-xs
-          font-medium
-          tracking-wide
-          text-slate-500
-          md:order-last
-        ">
-          &copy; 2026 DocMind AI. Tous droits réservés.
-        </p>
 
 
       </div>

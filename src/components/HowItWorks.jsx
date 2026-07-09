@@ -28,18 +28,21 @@ function HowItWorks() {
   return (
     <section 
       id="how"
-      className="relative bg-black py-32 overflow-hidden"
+      className="relative bg-black py-20 md:py-32 overflow-hidden"
     >
       
       <div className="
         absolute
         right-1/4
         bottom-0
-        h-[400px]
-        w-[400px]
+        h-[300px]
+        w-[300px]
+        md:h-[400px]
+        md:w-[400px]
         rounded-full
         bg-red-600/[0.03]
-        blur-[120px]
+        blur-[100px]
+        md:blur-[120px]
         pointer-events-none
       "/>
 
@@ -56,22 +59,25 @@ function HowItWorks() {
           text-center
         ">
           <h2 className="
-            text-4xl
+            text-3xl
+            sm:text-4xl
+            md:text-5xl
             font-extrabold
             tracking-tight
             text-white
-            md:text-5xl
             leading-[1.2]
           ">
             Comment fonctionne{" "}
-            <span className="bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
+            <span className="block sm:inline bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
               DocMind AI ?
             </span>
           </h2>
 
           <p className="
-            mt-6
-            text-lg
+            mt-4
+            md:mt-6
+            text-base
+            md:text-lg
             leading-relaxed
             text-slate-400
             max-w-xl
@@ -83,9 +89,12 @@ function HowItWorks() {
 
 
         <div className="
-          mt-24
+          mt-16
+          md:mt-24
           grid
-          gap-8
+          gap-6
+          md:gap-8
+          grid-cols-1
           md:grid-cols-3
         ">
           {steps.map((step) => {
@@ -102,7 +111,8 @@ function HowItWorks() {
                   border
                   border-white/5
                   bg-zinc-900/20
-                  p-8
+                  p-6
+                  md:p-8
                   backdrop-blur-md
                   transition-all
                   duration-300
@@ -118,7 +128,8 @@ function HowItWorks() {
                   -right-4
                   -top-6
                   select-none
-                  text-8xl
+                  text-7xl
+                  md:text-8xl
                   font-black
                   tracking-tighter
                   text-red-500/[0.03]
@@ -130,7 +141,8 @@ function HowItWorks() {
                 </span>
 
                 <span className="
-                  text-sm
+                  text-xs
+                  md:text-sm
                   font-bold
                   tracking-widest
                   text-red-500/80
@@ -139,10 +151,13 @@ function HowItWorks() {
                 </span>
 
                 <div className="
-                  mt-6
+                  mt-4
+                  md:mt-6
                   flex
-                  h-14
-                  w-14
+                  h-12
+                  w-12
+                  md:h-14
+                  md:w-14
                   items-center
                   justify-center
                   rounded-2xl
@@ -159,8 +174,10 @@ function HowItWorks() {
                 ">
                   <Icon 
                     className="
-                      h-6
-                      w-6
+                      h-5
+                      w-5
+                      md:h-6
+                      md:w-6
                       text-red-400
                       transition-colors
                       group-hover:text-red-300
@@ -169,8 +186,10 @@ function HowItWorks() {
                 </div>
 
                 <h3 className="
-                  mt-8
-                  text-xl
+                  mt-6
+                  md:mt-8
+                  text-lg
+                  md:text-xl
                   font-semibold
                   tracking-tight
                   text-white
@@ -179,8 +198,10 @@ function HowItWorks() {
                 </h3>
 
                 <p className="
-                  mt-3
-                  text-base
+                  mt-2
+                  md:mt-3
+                  text-sm
+                  md:text-base
                   leading-relaxed
                   text-slate-400
                   transition-colors

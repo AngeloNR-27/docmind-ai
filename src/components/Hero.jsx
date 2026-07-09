@@ -2,18 +2,21 @@ import { Sparkles, FileText, Brain } from "lucide-react";
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-black pt-44 pb-32">
+    <section className="relative overflow-hidden bg-black pt-32 pb-24 md:pt-44 md:pb-32">
 
       <div className="
         absolute
         left-1/2
         top-12
         -translate-x-1/2
-        h-[500px]
-        w-[500px]
+        h-[300px]
+        w-[300px]
+        md:h-[500px]
+        md:w-[500px]
         rounded-full
         bg-red-600/10
-        blur-[120px]
+        blur-[80px]
+        md:blur-[120px]
         pointer-events-none
       "/>
 
@@ -23,14 +26,15 @@ function Hero() {
         mx-auto
         grid
         max-w-7xl
-        gap-16
+        gap-12
+        lg:gap-16
         px-6
         lg:grid-cols-2
         lg:items-center
       ">
 
 
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
 
           <div className="
             mb-6
@@ -55,15 +59,17 @@ function Hero() {
 
 
           <h1 className="
-            text-5xl
+            text-4xl
+            sm:text-5xl
             font-extrabold
-            leading-[1.15]
+            leading-[1.2]
+            md:leading-[1.15]
             tracking-tight
             text-white    
             md:text-6xl
           ">
             Transformez vos documents
-            <span className="block bg-gradient-to-r bottom-1 from-red-500 to-rose-400 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-red-500 to-rose-400 bg-clip-text text-transparent">
               en informations intelligentes.
             </span>
           </h1>
@@ -72,7 +78,8 @@ function Hero() {
           <p className="
             mt-6
             max-w-lg
-            text-lg
+            text-base
+            md:text-lg
             leading-relaxed
             text-slate-400
           ">
@@ -81,7 +88,10 @@ function Hero() {
 
 
           <button className="
-            mt-10
+            mt-8
+            md:mt-10
+            w-full
+            sm:w-auto
             rounded-full
             bg-gradient-to-r
             from-red-600
@@ -109,6 +119,9 @@ function Hero() {
           flex
           justify-center
           lg:justify-end
+          w-full
+          mt-6
+          lg:mt-0
         ">
 
           <div className="
@@ -120,7 +133,8 @@ function Hero() {
             border
             border-white/10
             bg-zinc-900/40
-            p-8
+            p-6
+            md:p-8
             backdrop-blur-xl
             shadow-2xl
             shadow-black/50
@@ -138,12 +152,12 @@ function Hero() {
               p-4
             ">
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/10">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/10 min-w-[40px]">
                 <FileText className="text-red-400 h-5 w-5"/>
               </div>
 
-              <div className="flex-1">
-                <p className="text-sm font-medium text-white">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-white truncate">
                   Document_Strategique.pdf
                 </p>
 
@@ -157,12 +171,13 @@ function Hero() {
 
 
             <div className="
-              my-10
+              my-8
+              md:my-10
               flex
               justify-center
             ">
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-red-500/10 border border-red-500/20">
-                <Brain className="h-12 w-12 text-red-400 animate-pulse" />
+              <div className="relative flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-red-500/10 border border-red-500/20">
+                <Brain className="h-10 w-10 md:h-12 md:w-12 text-red-400 animate-pulse" />
                 <div className="absolute inset-0 rounded-full bg-red-500/20 blur-md -z-10" />
               </div>
             </div>
