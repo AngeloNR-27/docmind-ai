@@ -1,6 +1,7 @@
 // import { useRef, useState } from "react";
 // import { UploadCloud } from "lucide-react";
 // import FileCard from "./FileCard";
+// import { extractTextFromPDF } from "../../services/pdf";
 
 
 // function UploadZone() {
@@ -13,9 +14,12 @@
 
 //   const [isDragging, setIsDragging] = useState(false);
 
+//   const [isLoading, setIsLoading] = useState(false);
 
 
-//   function handleFile(selectedFile){
+
+//   async function handleFile(selectedFile){
+
 
 //     if(
 //       selectedFile &&
@@ -23,6 +27,33 @@
 //     ){
 
 //       setFile(selectedFile);
+
+
+//       setIsLoading(true);
+
+
+//       try {
+
+//         const text = await extractTextFromPDF(selectedFile);
+
+
+//         console.log(
+//           "📄 Texte extrait :",
+//           text
+//         );
+
+
+//       } catch(error){
+
+//         console.error(
+//           "Erreur extraction PDF :",
+//           error
+//         );
+
+//       }
+
+
+//       setIsLoading(false);
 
 //     }
 
@@ -33,6 +64,7 @@
 //   function handleInputChange(event){
 
 //     const selectedFile = event.target.files[0];
+
 
 //     handleFile(selectedFile);
 
@@ -62,6 +94,7 @@
 
 //     event.preventDefault();
 
+
 //     setIsDragging(false);
 
 
@@ -88,9 +121,13 @@
 
 
 //       <div
+
 //         onDragOver={handleDragOver}
+
 //         onDragLeave={handleDragLeave}
+
 //         onDrop={handleDrop}
+
 
 //         className={`
 //           flex
@@ -115,6 +152,7 @@
 //           }
 
 //         `}
+
 //       >
 
 
@@ -131,37 +169,50 @@
 //         >
 
 //           <UploadCloud
+
 //             size={40}
-//             className="
-//               text-red-500
-//             "
+
+//             className="text-red-500"
+
 //           />
 
 //         </div>
 
 
 
+
 //         <h3
+
 //           className="
 //             mt-6
 //             text-2xl
 //             font-bold
 //             text-white
 //           "
+
 //         >
+
 //           Déposez votre document
+
 //         </h3>
 
 
 
+
 //         <p
+
 //           className="
 //             mt-3
 //             text-slate-400
 //           "
+
 //         >
+
 //           Glissez votre PDF ici ou sélectionnez un fichier.
+
 //         </p>
+
+
 
 
 
@@ -181,7 +232,10 @@
 
 
 
+
+
 //         <button
+
 //           onClick={() => inputRef.current.click()}
 
 //           className="
@@ -195,6 +249,7 @@
 //             transition
 //             hover:bg-red-500
 //           "
+
 //         >
 
 //           Sélectionner un fichier
@@ -202,21 +257,47 @@
 //         </button>
 
 
+
+
+//         {
+//           isLoading && (
+
+//             <p className="
+//               mt-5
+//               text-sm
+//               text-red-400
+//             ">
+
+//               Analyse du document...
+
+//             </p>
+
+//           )
+//         }
+
+
+
 //       </div>
 
 
 
-//       {file && (
 
-//         <FileCard
 
-//           file={file}
+//       {
+//         file && (
 
-//           onRemove={removeFile}
+//           <FileCard
 
-//         />
+//             file={file}
 
-//       )}
+//             onRemove={removeFile}
+
+//           />
+
+//         )
+//       }
+
+
 
 
 
@@ -233,133 +314,84 @@ import { useRef, useState } from "react";
 import { UploadCloud } from "lucide-react";
 import FileCard from "./FileCard";
 import { extractTextFromPDF } from "../../services/pdf";
+import DocumentAgent from "../../agents/DocumentAgent";
 
-
-function UploadZone() {
-
-
+function UploadZone({ setSummary, setIsLoading,isLoading, }) {
   const inputRef = useRef(null);
 
-
   const [file, setFile] = useState(null);
-
   const [isDragging, setIsDragging] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-
-
-  async function handleFile(selectedFile){
-
-
-    if(
+  async function handleFile(selectedFile) {
+    if (
       selectedFile &&
       selectedFile.type === "application/pdf"
-    ){
-
+    ) {
       setFile(selectedFile);
 
-
+      setSummary("");
       setIsLoading(true);
 
-
       try {
-
         const text = await extractTextFromPDF(selectedFile);
 
+        const summary = await DocumentAgent.summarize(text);
 
-        console.log(
-          "📄 Texte extrait :",
-          text
-        );
+        setSummary(summary);
 
-
-      } catch(error){
-
+      } catch (error) {
         console.error(
-          "Erreur extraction PDF :",
+          "Erreur lors de l'analyse :",
           error
         );
 
+        setSummary(
+          "Une erreur est survenue pendant l'analyse du document."
+        );
+      } finally {
+        setIsLoading(false);
       }
-
-
-      setIsLoading(false);
-
     }
-
   }
 
-
-
-  function handleInputChange(event){
-
+  function handleInputChange(event) {
     const selectedFile = event.target.files[0];
 
-
     handleFile(selectedFile);
-
   }
 
-
-
-  function handleDragOver(event){
-
+  function handleDragOver(event) {
     event.preventDefault();
 
     setIsDragging(true);
-
   }
 
-
-
-  function handleDragLeave(){
-
+  function handleDragLeave() {
     setIsDragging(false);
-
   }
 
-
-
-  function handleDrop(event){
-
+  function handleDrop(event) {
     event.preventDefault();
 
-
     setIsDragging(false);
-
 
     const droppedFile = event.dataTransfer.files[0];
 
-
     handleFile(droppedFile);
-
   }
 
-
-
-  function removeFile(){
-
+  function removeFile() {
     setFile(null);
 
+    setSummary("");
   }
 
-
-
   return (
-
     <div>
-
-
       <div
-
         onDragOver={handleDragOver}
-
         onDragLeave={handleDragLeave}
-
         onDrop={handleDrop}
-
-
         className={`
           flex
           min-h-[320px]
@@ -376,17 +408,11 @@ function UploadZone() {
 
           ${
             isDragging
-            ?
-            "border-red-500 bg-red-500/10 scale-[1.02]"
-            :
-            "border-white/20 bg-white/5"
+              ? "border-red-500 bg-red-500/10 scale-[1.02]"
+              : "border-white/20 bg-white/5"
           }
-
         `}
-
       >
-
-
         <div
           className="
             flex
@@ -398,77 +424,42 @@ function UploadZone() {
             bg-red-500/10
           "
         >
-
           <UploadCloud
-
             size={40}
-
             className="text-red-500"
-
           />
-
         </div>
 
-
-
-
         <h3
-
           className="
             mt-6
             text-2xl
             font-bold
             text-white
           "
-
         >
-
           Déposez votre document
-
         </h3>
 
-
-
-
         <p
-
           className="
             mt-3
             text-slate-400
           "
-
         >
-
           Glissez votre PDF ici ou sélectionnez un fichier.
-
         </p>
 
-
-
-
-
         <input
-
           ref={inputRef}
-
           type="file"
-
           accept=".pdf"
-
           hidden
-
           onChange={handleInputChange}
-
         />
 
-
-
-
-
         <button
-
           onClick={() => inputRef.current.click()}
-
           className="
             mt-8
             rounded-full
@@ -480,63 +471,31 @@ function UploadZone() {
             transition
             hover:bg-red-500
           "
-
         >
-
           Sélectionner un fichier
-
         </button>
 
-
-
-
-        {
-          isLoading && (
-
-            <p className="
+        {isLoading && (
+          <p
+            className="
               mt-5
               text-sm
               text-red-400
-            ">
-
-              Analyse du document...
-
-            </p>
-
-          )
-        }
-
-
-
+            "
+          >
+            Analyse du document...
+          </p>
+        )}
       </div>
 
-
-
-
-
-      {
-        file && (
-
-          <FileCard
-
-            file={file}
-
-            onRemove={removeFile}
-
-          />
-
-        )
-      }
-
-
-
-
-
+      {file && (
+        <FileCard
+          file={file}
+          onRemove={removeFile}
+        />
+      )}
     </div>
-
   );
-
 }
-
 
 export default UploadZone;
