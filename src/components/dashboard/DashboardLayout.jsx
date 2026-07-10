@@ -1,48 +1,23 @@
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
-
-function DashboardLayout({children}){
+function DashboardLayout({ children }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
+    <div className="flex min-h-screen bg-black">
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
-    <div className="
-      flex
-      min-h-screen
-      bg-black
-    ">
+      <div className="flex flex-1 flex-col min-w-0">
+        <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
 
-
-      <Sidebar />
-
-
-      <div className="
-        flex
-        flex-1
-        flex-col
-      ">
-
-        <Topbar />
-
-
-        <main className="
-          flex-1
-          p-8
-        ">
-
+        <main className="flex-1 p-4 sm:p-6 md:p-8">
           {children}
-
         </main>
-
-
       </div>
-
-
     </div>
-
   );
-
 }
-
 
 export default DashboardLayout;
