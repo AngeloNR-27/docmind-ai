@@ -3,6 +3,7 @@ import { useState } from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import UploadZone from "../components/upload/UploadZone";
 import SummaryCard from "../summary/SummaryCard";
+import DocumentList from "../documents/DocumentList";
 
 function Dashboard() {
   const [summary, setSummary] = useState("");
@@ -28,6 +29,7 @@ function Dashboard() {
         </div>
 
         <SummaryCard summary={summary} isLoading={isLoading} />
+        <DocumentList />
       </div>
     </DashboardLayout>
   );

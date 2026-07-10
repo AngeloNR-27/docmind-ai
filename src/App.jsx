@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
-
+import DocumentDetails from "./pages/DocumentDetails";
 
 function App() {
 
@@ -21,6 +21,11 @@ function App() {
         <Route 
           path="/app" 
           element={<Dashboard />} 
+        />
+
+        <Route
+          path="/app/document/:id"
+          element={<DocumentDetails />}
         />
 
       </Routes>
